@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
+import bPlogo from '../bplogo.png'
 
 
 const exercises = ['Sprint', 'Jog', 'Walk', 'Ballgame'];
@@ -64,14 +65,21 @@ const Exercise = () => {
     };
 
     return (
+
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <main className="px-20 py-10 text-center">
-                <h1 className="mb-6 text-4xl font-bold">Exercise</h1>
-                <div className="mb-2">
+                <div className="App" style={{ marginTop: '100px' }}>
+                    <img src={bPlogo} className="App-logo" alt="logo"></img>
+                    <h1 className="mb-6 text-4xl font-bold" style={{ display: "flex", justifyContent: "center" }}>
+                        Exercise
+                    </h1>
+                </div>
+                <div className="mb-2" style={{ display: "flex", justifyContent: "center" }}>
                     <Button
                         variant="contained"
                         color="success"
                         className="bg-blue-500 text-white m-2 px-4 py-2 rounded-lg"
+                        style={{ margin: "10px" }}
                         onClick={handleAddDayClick}
                     >
                         Add a day
@@ -80,6 +88,7 @@ const Exercise = () => {
                         variant="contained"
                         color="success"
                         className="bg-red-500 text-white m-2 px-4 py-2 rounded-lg"
+                        style={{ margin: "10px" }}
                         onClick={handleNoExercise}
                     >
                         Nah, I hate sports
@@ -87,11 +96,12 @@ const Exercise = () => {
                 </div>
 
                 {showExerciseChoices && (
-                    <div className="mb-6">
+                    <div className="mb-6" style={{ display: "flex", justifyContent: "center" }}>
                         {exercises.map((exercise) => (
                             <Button
                                 variant="contained"
                                 color="success"
+                                style={{ margin: "5px" }}
                                 key={exercise}
                                 className={`${selectedExercise === exercise ? 'bg-blue-500' : ''
                                     } m-2 px-4 py-2 rounded-lg`}
@@ -103,8 +113,8 @@ const Exercise = () => {
                     </div>
                 )}
                 {selectedExercise && (
-                    <div className="mb-7">
-                        <label className="mr-2" htmlFor="inputValue">
+                    <div className="mb-7" style={{ display: "flex", justifyContent: "center" }}>
+                        <label className="mr-2" htmlFor="inputValue" style={{ paddingTop: "10px", marginleft: "5px" }}>
                             Enter the time period on this sport:
                         </label>
                         <input
@@ -149,7 +159,7 @@ const Exercise = () => {
 
                 </button>
             </main>
-        </div>
+        </div >
     );
 };
 
