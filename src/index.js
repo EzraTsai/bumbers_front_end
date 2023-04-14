@@ -10,7 +10,6 @@ root.render(
   <React.StrictMode>
     <div style={{ border: 'solid 5px CCFFE5' }}>
       <App />
-      {/* <Tab /> */}
     </div>
   </React.StrictMode>
 );
