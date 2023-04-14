@@ -1,29 +1,17 @@
 import logo from './logo.svg';
+import bPlogo from './bplogo.png'
 import './App.css';
+import React from 'react';
 
 function App() {
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <p>
-  //         Edit <code>src/App.js</code> and save to reload.
-  //       </p>
-  //       <a
-  //         className="App-link"
-  //         href="https://reactjs.org"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Learn React
-  //       </a>
-  //     </header>
-  //   </div>
-  // );
-
   return (
-    <div className="App">
-      <h1>Hello World!</h1>
+
+    <div className="App" style={{ marginTop: '100px' }}>
+      {/* <h1>Body Predictor</h1> */}
+      <img src={bPlogo} className="App-logo" alt="logo"></img>
+      <h1>Body Predictor</h1>
+
+
     </div>
   );
 }

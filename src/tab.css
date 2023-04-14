@@ -1,0 +1,11 @@
+.tab {
+    color: blue;
+    background-color: lightblue;
+    margin-left: 40px;
+    border: solic 1px red;
+}
+
+.MuiTabs-flexContainer {
+    display: flex;
+    justify-content: center;
+}
