@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import bPlogo from '../bplogo.png'
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const exercises = ['Sprint', 'Jog', 'Walk', 'Ballgame'];
 
 const Exercise = () => {
+    const navigate = useNavigate();
+
     const [selectedExercise, setSelectedExercise] = useState(null);
     const [inputValue, setInputValue] = useState('');
     const [showExerciseChoices, setShowExerciseChoices] = useState(false);
@@ -35,7 +41,7 @@ const Exercise = () => {
           body: JSON.stringify({ exercise: selectedExercise, value: inputValue }),
         });
         */
-        window.location.href = '/analysis';
+        navigate('/analysis');
     };
 
     const handleNoExercise = () => {
@@ -123,7 +129,7 @@ const Exercise = () => {
                             value={inputValue}
                             onChange={handleInputChange}
                             className="border border-gray-300 px-2 py-1 rounded-md"
-                            style={{ margin: "0px 10px" }}
+                            style={{ width: "50px", margin: "0px 10px" }}
                         />
                         <Button
                             variant="contained"
@@ -137,28 +143,30 @@ const Exercise = () => {
                 )}
 
                 {exerciseList.map((entry, index) => (
-                    <div key={index}>
-                        <p key={index} className="text-2xl">
+                    <div key={index} style={{ display: "flex", justifyContent: "center" }}>
+                        <p key={index} className="text-2xl" style={{ marginTop: "10px" }}>
                             At day {entry.day}, Doing {entry.exercise} for {entry.time} minutes
                         </p>
+                        <div style={{ marginRight: "10px" }}>
+                            <IconButton aria-label="delete" onClick={() => RemoveExercise()}>
+                                <DeleteIcon color="secondary" />
+                            </IconButton>
 
-                        <button
-                            className="bg-red-500 text-white m-2 px-4 py-2 rounded-lg"
-                            onClick={() => RemoveExercise()}
-                        >
-                            Remove
-                        </button>
+                        </div>
                     </div>
                 ))}
 
                 <br />
-                <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-                    onClick={handleSubmit}
-                >
-                    Submit
-
-                </button>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Button
+                        className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                        variant="contained"
+                        color="success"
+                        onClick={handleSubmit}
+                    >
+                        Submit
+                    </Button>
+                </div>
             </main>
         </div >
     );

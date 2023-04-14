@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import FormGroup from '@mui/material/FormGroup';
 import Button from '@mui/material/Button';
+import axios from 'axios';
 
 
 function TabPanel(props) {
@@ -43,8 +44,10 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
-    const [value, setValue] = useState(0);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
+    const [value, setValue] = useState(0);
+    const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [height, setHeight] = useState();
@@ -82,15 +85,19 @@ export default function BasicTabs() {
     };
 
     const handleSignInSubmit = (event) => {
-        fetch('/login', {
-            method: 'GET',
+        axios({
+            method: 'POST',
+            baseURL: apiUrl,
+            url: "/login",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            data: JSON.stringify({ "email": email, "password": password })
         })
-            .then((response) => response.json())
+
+            .then((response) => console.log(response))
             .then((data) => {
+
                 // handle successful sign up here
             })
             .catch((error) => {
@@ -118,34 +125,35 @@ export default function BasicTabs() {
                             noValidate
                             autoComplete="off"
                         >
-                            <div style={{ paddging: '0px', paddingBottom: '-20px', marginBottom: "50px" }}>
+                            <div style={{ paddging: '0px', paddingBottom: '-20px', marginBottom: "5px" }}>
+                                <TextField
+                                    required
+                                    id="outlined-textarea"
+                                    label="username"
+                                    onChange={(event) => setUsername(event.target.value)}
+                                />
                                 <TextField
                                     required
                                     id="outlined-textarea"
                                     label="Email"
-                                    // value={email}
                                     onChange={(event) => setEmail(event.target.value)}
                                 />
-
                                 <TextField
                                     required
                                     id="outlined-textarea"
                                     label="Password"
-                                    // value={password}
                                     onChange={(event) => setPassword(event.target.value)}
                                 />
                                 <TextField
                                     required
                                     label="Height"
                                     type="height"
-                                    // value={height}
                                     onChange={(event) => setHeight(event.target.value)}
                                 />
                                 <TextField
                                     required
                                     label="Weight"
                                     type="weight"
-                                    // value={weight}
                                     onChange={(event) => setWeight(event.target.value)}
                                 />
                             </div>
@@ -177,12 +185,14 @@ export default function BasicTabs() {
                                 required
                                 id="outlined-textarea"
                                 label="Email"
+                                onChange={(event) => setEmail(event.target.value)}
                             />
 
                             <TextField
                                 required
                                 id="outlined-textarea"
                                 label="Password"
+                                onChange={(event) => setPassword(event.target.value)}
                             />
                         </div>
                     </Box>
