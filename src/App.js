@@ -1,18 +1,19 @@
-import logo from './logo.svg';
-import bPlogo from './bplogo.png'
 import './App.css';
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from './home/home';
+import Body from './body/body';
+import Food from './food/food';
 
 function App() {
   return (
-
-    <div className="App" style={{ marginTop: '100px' }}>
-      {/* <h1>Body Predictor</h1> */}
-      <img src={bPlogo} className="App-logo" alt="logo"></img>
-      <h1>Body Predictor</h1>
-
-
-    </div>
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/body" element={<Body />} />
+        <Route path="/food" element={<Food />} />
+      </Routes>
+    </Router>
   );
 }
 

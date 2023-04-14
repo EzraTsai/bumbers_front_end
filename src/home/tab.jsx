@@ -8,7 +8,6 @@ import TextField from '@mui/material/TextField';
 import FormGroup from '@mui/material/FormGroup';
 import Button from '@mui/material/Button';
 
-
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -94,40 +93,41 @@ export default function BasicTabs() {
                     </div>
                 </FormGroup>
             </TabPanel >
-            <TabPanel value={value} index={1}><FormGroup>
-                <Box
-                    component="form"
-                    sx={{
-                        '& .MuiTextField-root': { m: 1, width: '25ch' },
-                    }}
-                    noValidate
-                    autoComplete="off"
-                >
-                    <div style={{ paddging: '0px', paddingBottom: '-20px', marginBottom: "50px", marginLeft: '80px' }}>
-                        <TextField
-                            required
-                            id="outlined-textarea"
-                            label="Email"
-                        />
-
-                        <TextField
-                            required
-                            id="outlined-textarea"
-                            label="Password"
-                        />
-                    </div>
-                </Box>
-                <div style={{ margin: '0px 50px 100px 130px' }}>
-                    <Button
-                        variant="contained" color="success"
-                        onClick={() => {
-                            alert('clicked');
+            <TabPanel value={value} index={1}>
+                <FormGroup>
+                    <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { m: 1, width: '25ch' },
                         }}
+                        noValidate
+                        autoComplete="off"
                     >
-                        Sign in
-                    </Button>
-                </div>
-            </FormGroup>
+                        <div style={{ paddging: '0px', paddingBottom: '-20px', marginBottom: "50px", marginLeft: '80px' }}>
+                            <TextField
+                                required
+                                id="outlined-textarea"
+                                label="Email"
+                            />
+
+                            <TextField
+                                required
+                                id="outlined-textarea"
+                                label="Password"
+                            />
+                        </div>
+                    </Box>
+                    <div style={{ margin: '0px 50px 100px 130px' }}>
+                        <Button
+                            variant="contained" color="success"
+                            onClick={() => {
+                                alert('clicked');
+                            }}
+                        >
+                            Sign in
+                        </Button>
+                    </div>
+                </FormGroup>
             </TabPanel>
         </Box >
     );
