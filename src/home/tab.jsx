@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import FormGroup from '@mui/material/FormGroup';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -82,14 +84,16 @@ export default function BasicTabs() {
                         </div>
                     </Box>
                     <div style={{ margin: '0px 50px 100px 130px' }}>
-                        <Button
-                            variant="contained" color="success"
-                            onClick={() => {
-                                alert('clicked');
-                            }}
-                        >
-                            Sign up
-                        </Button>
+                        <Link to="/body">
+                            <Button
+                                variant="contained" color="success"
+                                onClick={() => {
+                                    alert('clicked');
+                                }}
+                            >
+                                Sign up
+                            </Button>
+                        </Link>
                     </div>
                 </FormGroup>
             </TabPanel >

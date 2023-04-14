@@ -44,7 +44,7 @@ function App() {
                     fullWidth
                 />
                 <Button type="submit" variant="contained" color="primary">
-                    Submit
+                    Next
                 </Button>
             </form>
         </Container>
