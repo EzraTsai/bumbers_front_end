@@ -81,6 +81,23 @@ export default function BasicTabs() {
         window.location.href = '/food';
     };
 
+    const handleSignInSubmit = (event) => {
+        fetch('/login', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                // handle successful sign up here
+            })
+            .catch((error) => {
+                // handle sign up error here
+            });
+    }
+
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }} style={{ margin: "50px", display: 'flex', justifyContent: 'space-around' }}>
@@ -133,7 +150,7 @@ export default function BasicTabs() {
                                 />
                             </div>
                         </Box>
-                        <div style={{ margin: '0px 0px 50px 10px' }}>
+                        <div>
                             <Button
                                 variant="contained"
                                 color="success"
@@ -155,7 +172,7 @@ export default function BasicTabs() {
                         noValidate
                         autoComplete="off"
                     >
-                        <div style={{ paddging: '0px', paddingBottom: '-20px', marginBottom: "50px", marginLeft: '80px' }}>
+                        <div style={{ paddging: '0px', paddingBottom: '-20px', marginBottom: "50px" }}>
                             <TextField
                                 required
                                 id="outlined-textarea"
@@ -169,12 +186,10 @@ export default function BasicTabs() {
                             />
                         </div>
                     </Box>
-                    <div style={{ margin: '0px 50px 100px 130px' }}>
+                    <div >
                         <Button
                             variant="contained" color="success"
-                            onClick={() => {
-                                alert('clicked');
-                            }}
+                            onClick={handleSignInSubmit}
                         >
                             Sign in
                         </Button>

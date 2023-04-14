@@ -113,8 +113,8 @@ const Exercise = () => {
                     </div>
                 )}
                 {selectedExercise && (
-                    <div className="mb-7" style={{ display: "flex", justifyContent: "center" }}>
-                        <label className="mr-2" htmlFor="inputValue" style={{ paddingTop: "10px", marginleft: "5px" }}>
+                    <div className="mb-7" style={{ display: "flex", justifyContent: "center", marginTop: "5px" }}>
+                        <label className="mr-2" htmlFor="inputValue" style={{ paddingTop: "10px" }}>
                             Enter the time period on this sport:
                         </label>
                         <input
@@ -123,6 +123,7 @@ const Exercise = () => {
                             value={inputValue}
                             onChange={handleInputChange}
                             className="border border-gray-300 px-2 py-1 rounded-md"
+                            style={{ margin: "0px 10px" }}
                         />
                         <Button
                             variant="contained"
