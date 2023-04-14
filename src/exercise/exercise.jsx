@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 
 const exercises = ['Sprint', 'Jog', 'Walk', 'Ballgame'];
 
 const Exercise = () => {
-    // const history = useHistory();
     const [selectedExercise, setSelectedExercise] = useState(null);
     const [inputValue, setInputValue] = useState('');
     const [showExerciseChoices, setShowExerciseChoices] = useState(false);
@@ -35,7 +34,7 @@ const Exercise = () => {
           body: JSON.stringify({ exercise: selectedExercise, value: inputValue }),
         });
         */
-        // history.push('/analysis');
+        window.location.href = '/analysis';
     };
 
     const handleNoExercise = () => {
@@ -69,31 +68,37 @@ const Exercise = () => {
             <main className="px-20 py-10 text-center">
                 <h1 className="mb-6 text-4xl font-bold">Exercise</h1>
                 <div className="mb-2">
-                    <button
+                    <Button
+                        variant="contained"
+                        color="success"
                         className="bg-blue-500 text-white m-2 px-4 py-2 rounded-lg"
                         onClick={handleAddDayClick}
                     >
                         Add a day
-                    </button>
-                    <button
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="success"
                         className="bg-red-500 text-white m-2 px-4 py-2 rounded-lg"
                         onClick={handleNoExercise}
                     >
                         Nah, I hate sports
-                    </button>
+                    </Button>
                 </div>
 
                 {showExerciseChoices && (
                     <div className="mb-6">
                         {exercises.map((exercise) => (
-                            <button
+                            <Button
+                                variant="contained"
+                                color="success"
                                 key={exercise}
                                 className={`${selectedExercise === exercise ? 'bg-blue-500' : ''
                                     } m-2 px-4 py-2 rounded-lg`}
                                 onClick={() => handleExerciseClick(exercise)}
                             >
                                 {exercise}
-                            </button>
+                            </Button>
                         ))}
                     </div>
                 )}
@@ -109,12 +114,14 @@ const Exercise = () => {
                             onChange={handleInputChange}
                             className="border border-gray-300 px-2 py-1 rounded-md"
                         />
-                        <button
+                        <Button
+                            variant="contained"
+                            color="success"
                             className="bg-blue-500 text-white m-2 px-4 py-2 rounded-lg"
                             onClick={() => handleAddExercise()}
                         >
                             Add
-                        </button>
+                        </Button>
                     </div>
                 )}
 
@@ -134,15 +141,13 @@ const Exercise = () => {
                 ))}
 
                 <br />
-                <Link to="/analysis">
-                    <button
-                        className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-                        onClick={handleSubmit}
-                    >
-                        Submit
+                <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                    onClick={handleSubmit}
+                >
+                    Submit
 
-                    </button>
-                </Link>
+                </button>
             </main>
         </div>
     );
