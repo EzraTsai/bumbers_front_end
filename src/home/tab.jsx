@@ -8,6 +8,8 @@ import TextField from '@mui/material/TextField';
 import FormGroup from '@mui/material/FormGroup';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { AlarmTwoTone } from '@mui/icons-material';
 
 
 function TabPanel(props) {
@@ -45,6 +47,7 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
     const apiUrl = process.env.REACT_APP_API_URL;
+    const navigate = useNavigate();
 
     const [value, setValue] = useState(0);
     const [username, setUsername] = useState();
@@ -58,30 +61,33 @@ export default function BasicTabs() {
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault();
-        // if (!email || !password) {
-        //     // prevent form submission
-        //     console.log("asdfsad", event)
-        //     return;
-        // }
+        if (!email || !password) {
+            // prevent form submission
+            console.log("asdfsad", event)
 
-        // // handle form submission here
-        // fetch('/api/signup', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({ email, password })
-        // })
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         // handle successful sign up here
-        //     })
-        //     .catch((error) => {
-        //         // handle sign up error here
-        //     });
+            return;
+        };
+        // handle form submission here
+        axios({
+            method: 'POST',
+            baseURL: apiUrl,
+            url: "/signup",
 
-        window.location.href = '/food';
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify({ "username": username, "email": email, "password": password, "weight": weight, "height": height })
+        })
+            .then((response) => {
+                console.log(response)
+                navigate('/meal')
+            })
+            .then((data) => {
+                // handle successful sign up here
+            })
+            .catch((error) => {
+                // handle sign up error here
+            });
     };
 
     const handleSignInSubmit = (event) => {
@@ -95,12 +101,19 @@ export default function BasicTabs() {
             data: JSON.stringify({ "email": email, "password": password })
         })
 
-            .then((response) => console.log(response))
-            .then((data) => {
+            .then((response) => {
+                console.log(response.data["error"])
+                if (response.data["token"]) {
+                    localStorage.setItem("myCookie: ", response.data["token"])
+                    navigate('/meal')
+                } else {
+                    alert(response.data["error"])
+                }
 
-                // handle successful sign up here
             })
+
             .catch((error) => {
+                console.log(error)
                 // handle sign up error here
             });
     }
@@ -115,60 +128,63 @@ export default function BasicTabs() {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <form onSubmit={handleSubmit}>
-                    <FormGroup>
-                        <Box
-                            component="form"
-                            sx={{
-                                '& .MuiTextField-root': { m: 1, width: '25ch' },
-                            }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <div style={{ paddging: '0px', paddingBottom: '-20px', marginBottom: "5px" }}>
-                                <TextField
-                                    required
-                                    id="outlined-textarea"
-                                    label="username"
-                                    onChange={(event) => setUsername(event.target.value)}
-                                />
-                                <TextField
-                                    required
-                                    id="outlined-textarea"
-                                    label="Email"
-                                    onChange={(event) => setEmail(event.target.value)}
-                                />
-                                <TextField
-                                    required
-                                    id="outlined-textarea"
-                                    label="Password"
-                                    onChange={(event) => setPassword(event.target.value)}
-                                />
-                                <TextField
-                                    required
-                                    label="Height"
-                                    type="height"
-                                    onChange={(event) => setHeight(event.target.value)}
-                                />
-                                <TextField
-                                    required
-                                    label="Weight"
-                                    type="weight"
-                                    onChange={(event) => setWeight(event.target.value)}
-                                />
-                            </div>
-                        </Box>
-                        <div>
-                            <Button
-                                variant="contained"
-                                color="success"
-                                type="submit"
-                            >
-                                Sign up
-                            </Button>
+                {/* <form onSubmit={handleSubmit}> */}
+                <FormGroup>
+                    <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { m: 1, width: '25ch' },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
+                        <div style={{ paddging: '0px', paddingBottom: '-20px', marginBottom: "5px" }}>
+                            <TextField
+                                required
+                                id="outlined-textarea"
+                                label="username"
+                                onChange={(event) => setUsername(event.target.value)}
+                            />
+                            <TextField
+                                required
+                                id="outlined-textarea"
+                                label="Email"
+                                onChange={(event) => setEmail(event.target.value)}
+                            />
+                            <TextField
+                                required
+                                id="outlined-textarea"
+                                label="Password"
+                                onChange={(event) => setPassword(event.target.value)}
+                            />
+                            <TextField
+                                required
+                                label="Height"
+                                type="height"
+                                onChange={(event) => setHeight(event.target.value)}
+                            />
+                            <TextField
+                                required
+                                label="Weight"
+                                type="weight"
+                                onChange={(event) => setWeight(event.target.value)}
+                            />
                         </div>
-                    </FormGroup>
-                </form>
+                    </Box>
+                    <div>
+                        <Button
+
+                            variant="contained"
+                            color="success"
+                            type="submit"
+                            onClick={handleSubmit}
+
+                        >
+                            Sign up
+                        </Button>
+                    </div>
+                </FormGroup>
+                {/* </form> */}
             </TabPanel >
             <TabPanel value={value} index={1}>
                 <FormGroup>
