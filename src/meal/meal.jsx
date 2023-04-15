@@ -29,16 +29,21 @@ const Meal = () => {
     }, []);
 
     useEffect(() => {
-        // const { mealNumber, mealFood } = router.query;
+        const mealNumber = queryParams.get('mealNumber');
+        const mealFood = queryParams.get('mealFood');
+
+        setLocalQuery({ mealNumber, mealFood });
+
         if (mealNumber && mealFood) {
-            const updatedMealList = [...mealList];
-            const mealIndex = updatedMealList.findIndex((meal) => meal.meal_number === parseInt(mealNumber));
-            if (mealIndex !== -1) {
-                updatedMealList[mealIndex].food = [mealFood];
-                setMealList(updatedMealList);
-            }
+            setMealList((prevMealList) =>
+                prevMealList.map((meal) =>
+                    meal.meal_number === parseInt(mealNumber)
+                        ? { ...meal, food: [mealFood] }
+                        : meal
+                )
+            );
         }
-    }, [localQuery]);
+    }, [queryParams]);
 
     const handleAddFoodClick = (mealNumber) => {
         localStorage.setItem('mealList', JSON.stringify(mealList));
@@ -64,7 +69,7 @@ const Meal = () => {
             body: JSON.stringify(localQuery),
         });
         setMealList([]);
-        // navigate('/exercise');
+        navigate('/analysis')
     };
 
     const isValidQuery = () => {
