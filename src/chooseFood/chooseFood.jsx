@@ -88,14 +88,15 @@ const ChooseFood = () => {
                             style={{ width: "50px", margin: "0px 10px" }}
                             onClick={handleSearchClick}
                         >
-                            Search
+                            Enter
                         </Button>
                     </div>
                     <div className="mb-7" style={{ display: "flex", justifyContent: "center" }}>
-                        <label htmlFor="food_output">The food you entered </label>
-                        <p id="food_output" className="border border-gray-300 px-2 py-1 rounded-md inline-block">
-                            {foodOutput}
-                        </p>
+                        <div style={{ magin: "16px" }}>
+                            <label htmlFor="food_output" >
+                                The food you entered
+                            </label>
+                        </div>
                     </div>
                     {isValidFood() && (
                         <div className="mb-7">
@@ -105,6 +106,7 @@ const ChooseFood = () => {
                                 id="food_count"
                                 value={foodCount}
                                 onChange={handleFoodCountChange}
+                                style={{ width: "50px", margin: "0px 10px" }}
                                 className="border border-gray-300 px-2 py-1 rounded-md"
                             />
                             {isValidFoodCount() && (
