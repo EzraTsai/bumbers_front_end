@@ -7,6 +7,7 @@ import ChooseFood from './chooseFood/chooseFood';
 import Meal from './meal/meal';
 import Exercise from './exercise/exercise';
 import Analysis from './analysis/analysis'
+import Result from './result/result';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/body" element={<Body />} />
         <Route path="/meal" element={<Meal />} />
         <Route path="/choosefood" element={<ChooseFood />} />
+        <Route path="/result" element={<Result />} />
         <Route path="/analysis" element={<Analysis />} />
         <Route path="/exercise" element={<Exercise />} />
       </Routes>

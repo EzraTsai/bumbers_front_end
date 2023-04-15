@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import bPlogo from '../bplogo.png'
 import Button from '@mui/material/Button';
+import axios from 'axios';
 
 const Meal = () => {
 
@@ -61,15 +62,16 @@ const Meal = () => {
 
     const handleLocalQuerySubmit = async () => {
         // Send localQuery data to the backend system here
-        await fetch('/api/saveLocalQueryData', {
+        await axios({
             method: 'POST',
+            url: "/addmeal",
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(localQuery),
+            body: JSON.stringify({ "meal": mealList }),
         });
-        setMealList([]);
-        navigate('/analysis')
+
+        navigate('/exercise');
     };
 
     const isValidQuery = () => {

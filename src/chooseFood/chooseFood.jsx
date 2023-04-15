@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import bPlogo from '../bplogo.png'
-
+import axios from 'axios';
 
 
 
 const ChooseFood = () => {
+
+    const apiUrl = process.env.REACT_APP_API_URL
     const navigate = useNavigate();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
@@ -32,21 +34,25 @@ const ChooseFood = () => {
     };
 
     const handleSearchClick = async () => {
-        // const response = await fetch('/api/searchFood', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({ searchInput }),
-        // });
+        axios({
+            method: 'GET',
+            baseURL: apiUrl,
+            url: '/search',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            params: { "name": searchInput },
+        })
+            .then(response => {
+                if (response.data['success']) {
+                    setFoodOutput(searchInput)
+                }
+                else {
+                    setFoodOutput('The food is not exist in food database!')
+                }
+            })
+            .catch(error => console.log(error))
 
-        setResult('success');
-
-        if (result === 'success') {
-            setFoodOutput(searchInput);
-        } else if (result === 'fail') {
-            setFoodOutput('The food is not exist in food database!');
-        }
     };
 
     const handleAddClick = () => {

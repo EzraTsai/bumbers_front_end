@@ -26,17 +26,19 @@ const Analysis = () => {
             <h1 className="mb-6 text-4xl font-bold">
                 {data.message}
             </h1>
-            <img src={bodyfat14} className="App-logo" alt="logo"></img>
+            <img src={bodyfat30} className="App-logo" alt="logo"></img>
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <Card sx={{ maxWidth: 345 }}>
                     <CardActionArea>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
-                                <p className="mb-6 text-lg">{data.paragraph}</p>
+                                {/* <p className="mb-6 text-lg">{data.paragraph}</p> */}
+                                <p>Obese Class 3</p>
+                                <p>Potential Risks: hyperlipidemia + diabetes</p>
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">
+                            {/* <Typography variant="body2" color="text.secondary">
                                 <p>THIS IS FOR CHATGPT!!!!</p>
-                            </Typography>
+                            </Typography> */}
                         </CardContent>
                     </CardActionArea>
                 </Card>

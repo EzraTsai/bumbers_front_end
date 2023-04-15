@@ -4,6 +4,7 @@ import bPlogo from '../bplogo.png'
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 
@@ -32,15 +33,16 @@ const Exercise = () => {
         setDay(0);
 
         // Send data to the backend system here
-        /*
-        await fetch('/api/saveExerciseData', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ exercise: selectedExercise, value: inputValue }),
-        });
-        */
+        await axios({
+            method: 'POST',
+            url: "/addexercise",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${localStorage.getItem("mytoken")}`
+
+            },
+            body: JSON.stringify({ "exercise": exerciseList }),
+        })
         navigate('/analysis');
     };
 
